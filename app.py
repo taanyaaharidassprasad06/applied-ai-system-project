@@ -111,7 +111,10 @@ if st.session_state.status != "playing":
         # FIX: Show win_message with the score if won
         if st.session_state.win_message:
             st.success(st.session_state.win_message)
-        st.success("You already won. Start a new game to play again.")
+        else:
+            st.success("You already won. Start a new game to play again.")
+        if st.session_state.feedback:
+            st.warning(st.session_state.feedback) 
     else:
         # FIX: Show final_message with the secret number and generic game over message together
         st.error(st.session_state.final_message)
