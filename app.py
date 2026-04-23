@@ -16,7 +16,7 @@ difficulty = st.sidebar.selectbox(
 )
 
 attempt_limit_map = {
-    #FIX: Change attempt limit to make Easy have the most attempts and Hard have the least attempts
+    # FIX: Change attempt limit to make Easy have the most attempts and Hard have the least attempts
     "Easy": 8,
     "Normal": 6,
     "Hard": 5,
@@ -32,8 +32,8 @@ if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
 if "attempts" not in st.session_state:
-    #FIXME: Attempts should start at 0 instead of 1 since the player has not made a guess yet
-    #FIX: Changed initial value from 1 to 0 so the first guess is counted as an attempt
+    # TO FIX: Attempts should start at 0 instead of 1 since the player has not made a guess yet
+    # FIX: Changed initial value from 1 to 0 so the first guess is counted as an attempt
     st.session_state.attempts = 0
 
 if "score" not in st.session_state:
@@ -48,10 +48,22 @@ if "history" not in st.session_state:
 if "feedback" not in st.session_state:
     st.session_state.feedback = None
 
+if "error_message" not in st.session_state:
+    st.session_state.error_message = None
+
+# FIX: Added final_message to session state so the secret is revealed after the game ends
+if "final_message" not in st.session_state:
+    st.session_state.final_message = None
+
+# FIX: Added win_message to session state so the score shows when game won
+if "win_message" not in st.session_state:
+    st.session_state.win_message = None
+
+
 st.subheader("Make a guess")
 
 st.info(
-    #FIX: Use actual low / high values from get_range_for_difficulty instead of hardcoded 1 and 100
+    # FIX: Use actual low / high values from get_range_for_difficulty instead of hardcoded 1 and 100
     f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
@@ -65,7 +77,7 @@ with st.expander("Developer Debug Info"):
 
 raw_guess = st.text_input(
     "Enter your guess:",
-    # FIXME: Guess input does not reset properly on new game
+    # TO FIX: Guess input does not reset properly on new game
     # FIX: Added game_id to the key to ensure it resets properly when a new game is started
     key=f"guess_input_{difficulty}_{st.session_state.get('game_id', 0)}"
 )
@@ -78,42 +90,50 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
-#FIXME: New game button does not reset the game state properly
+# TO FIX: New game button does not reset the game state properly
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(low, high)
-    #FIX: Reset remaining game settings back to the initial state using Claude Code to ensure new game is started
+    # FIX: Reset remaining game settings back to the initial state using Claude Code to ensure new game is started
     st.session_state.status = "playing"
     st.session_state.history = []
     st.session_state.score = 0
     st.session_state.feedback = None
     st.session_state.game_id = st.session_state.get("game_id", 0) + 1
+    st.session_state.error_message = None
+    st.session_state.final_message = None
+    st.session_state.win_message = None
     st.success("New game started.")
     st.rerun()
 
 if st.session_state.status != "playing":
     if st.session_state.status == "won":
+        # FIX: Show win_message with the score if won
+        if st.session_state.win_message:
+            st.success(st.session_state.win_message)
         st.success("You already won. Start a new game to play again.")
     else:
+        # FIX: Show final_message with the secret number and generic game over message together
+        st.error(st.session_state.final_message)
         st.error("Game over. Start a new game to try again.")
     st.stop()
 
 if submit:
-    st.session_state.attempts += 1
-
     ok, guess_int, err = parse_guess(raw_guess)
 
     if not ok:
         st.session_state.history.append(raw_guess)
-        st.error(err)
+        st.session_state.error_message = err
     else:
+        st.session_state.attempts += 1
+        st.session_state.error_message = None
         st.session_state.history.append(guess_int)
         
-        #FIXME: The game behaves inconsistently every other attempt, sometimes treating the secret as a string and sometimes as an int which results in miscounting the attempts
-        #FIX: Always pass secret as int so check_guess comparison is consistent
+        # TO FIX: The game behaves inconsistently every other attempt, sometimes treating the secret as a string and sometimes as an int which results in miscounting the attempts
+        # FIX: Always pass secret as int so check_guess comparison is consistent
         outcome, message = check_guess(guess_int, st.session_state.secret)
 
-        #FIX: Store hint messages in session state so they persist across reruns and can be displayed after the guess is processed
+        # FIX: Store hint messages in session state so they persist across reruns and can be displayed after the guess is processed
         st.session_state.feedback = message if show_hint else None
 
         st.session_state.score = update_score(
@@ -125,25 +145,30 @@ if submit:
         if outcome == "Win":
             st.balloons()
             st.session_state.status = "won"
-            st.success(
+            # FIX: Store win message in session state instead of displaying directly so it persists across the rerun
+            st.session_state.win_message = (
                 f"You won! The secret was {st.session_state.secret}. "
                 f"Final score: {st.session_state.score}"
             )
         else:
             if st.session_state.attempts >= attempt_limit:
                 st.session_state.status = "lost"
-                st.error(
+                # FIX: Store final message in session state instead of displaying directly so it persists across the rerun
+                st.session_state.final_message = (
                     f"Out of attempts! "
                     f"The secret was {st.session_state.secret}. "
                     f"Score: {st.session_state.score}"
-               )
-    #FIX: Rerun the app after submitting a guess to ensure the number of attempts left / used is reflected correctly
-    # Only rerun while playing so won/lost final messages (which include the secret) are not swallowed
-    if st.session_state.status == "playing":
-        st.rerun()
+                )
+    # FIX: Rerun after every guess so the attempts left counter and game state update immediately
+    # without st.rerun() attempts is incremented but the info bar shows the old value (before incrementing) since Streamlit renders top to bottom so the attempts incrementing is not rendered in UI
+    # with st.rerun() attempts is incremented when submit is pressed and the script restarts from the top to correctly render to accurate attempts left count
+    st.rerun()
 # FIX: Display feedback message after processing the guess so it persists across reruns and is not lost when the user submits a new guess
 if st.session_state.feedback:
     st.warning(st.session_state.feedback)
+
+if st.session_state.error_message:
+    st.error(st.session_state.error_message)
 
 st.divider()
 st.caption("Built by an AI that claims this code is production-ready.")
