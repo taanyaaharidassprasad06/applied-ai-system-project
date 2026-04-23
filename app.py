@@ -60,6 +60,9 @@ if "final_message" not in st.session_state:
 if "win_message" not in st.session_state:
     st.session_state.win_message = None
 
+if "show_balloons" not in st.session_state:
+    st.session_state.show_balloons = False
+
 
 st.subheader("Make a guess")
 
@@ -104,22 +107,39 @@ if new_game:
     st.session_state.error_message = None
     st.session_state.final_message = None
     st.session_state.win_message = None
+    st.session_state.show_balloons = False
     st.success("New game started.")
     st.rerun()
 
 if st.session_state.status != "playing":
     if st.session_state.status == "won":
+        if st.session_state.show_balloons:
+            st.balloons()
+            st.session_state.show_balloons = False
         # FIX: Show win_message with the score if won
         if st.session_state.win_message:
             st.success(st.session_state.win_message)
         else:
             st.success("You already won. Start a new game to play again.")
         if st.session_state.feedback:
-            st.warning(st.session_state.feedback) 
+            st.warning(st.session_state.feedback)
     else:
         # FIX: Show final_message with the secret number and generic game over message together
         st.error(st.session_state.final_message)
         st.error("Game over. Start a new game to try again.")
+
+    st.divider()
+    st.subheader("🧪 Reliability Tester")
+
+    if st.button("Run Reliability Tests"):
+        with st.spinner("Running tests..."):
+            result = subprocess.run(
+                ["python", "reliability_test.py"],
+                capture_output=True,
+                text=True
+            )
+        st.markdown(result.stdout)
+
     st.stop()
 
 if submit:
@@ -147,8 +167,8 @@ if submit:
         )
 
         if outcome == "Win":
-            st.balloons()
             st.session_state.status = "won"
+            st.session_state.show_balloons = True
             # FIX: Store win message in session state instead of displaying directly so it persists across the rerun
             st.session_state.win_message = (
                 f"You won! The secret was {st.session_state.secret}. "
@@ -188,4 +208,4 @@ if st.button("Run Reliability Tests"):
             text=True # output is received as a normal string
         )
 
-    st.code(result.stdout)
+    st.markdown(result.stdout)
