@@ -1,7 +1,7 @@
 # 🎮 Game Glitch Investigator: The Impossible Guesser
 
 ## 🧩 Overview
-This project involved debugging and a "Number Guessing Game" that was built using Streamlit. The app was full of broken features that made the game unplayable and my role was manual testing, identifying bugs, and using AI tools such as Claude Code and ChatGPT to implement fixes and tests. This project taught me how to prompt AI effectively and verify its suggestions line by line.
+This project involved debugging a "Number Guessing Game" that was built using Streamlit. The app was full of broken features that made the game unplayable and my role was manual testing, identifying bugs, and using AI tools such as Claude Code and ChatGPT to implement fixes and tests. This project taught me how to prompt AI effectively and verify its suggestions line by line.
 
 
 ## 🚨 The Situation

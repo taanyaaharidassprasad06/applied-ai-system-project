@@ -1,3 +1,4 @@
+import subprocess
 import random
 import streamlit as st
 from logic_utils import get_range_for_difficulty, parse_guess, check_guess, update_score
@@ -175,3 +176,16 @@ if st.session_state.error_message:
 
 st.divider()
 st.caption("Built by an AI that claims this code is production-ready.")
+
+st.divider()
+st.subheader("🧪 Reliability Tester")
+
+if st.button("Run Reliability Tests"):
+    with st.spinner("Running tests..."):
+        result = subprocess.run(
+            ["python", "reliability_test.py"], # start new python process and run reliability_test.py
+            capture_output=True, # capture everything it prints and store in results
+            text=True # output is received as a normal string
+        )
+
+    st.code(result.stdout)
