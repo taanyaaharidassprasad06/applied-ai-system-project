@@ -1,0 +1,70 @@
+2026-04-25 07:13:12,717 - PASS | Correct guess should be a win | expected=Win, got=Win
+2026-04-25 07:13:12,717 - PASS | Guess too high should return Too High | expected=Too High, got=Too High
+2026-04-25 07:13:12,717 - PASS | Guess too low should return Too Low | expected=Too Low, got=Too Low
+2026-04-25 07:13:12,718 - PASS | Valid number string should parse correctly | expected=True, got=True
+2026-04-25 07:13:12,718 - PASS | Non-number guess should fail to parse | expected=False, got=False
+2026-04-25 07:13:12,718 - PASS | Win on first attempt should score 90 | expected=90, got=90
+2026-04-25 07:13:12,718 - PASS | Wrong guess Too Low should deduct 5 points | expected=95, got=95
+2026-04-25 07:13:12,718 - AFC is enabled with max remote calls: 10.
+2026-04-25 07:13:19,467 - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-25 07:13:19,468 - Gemini report generated successfully
+2026-04-25 09:02:27,577 - FAIL | Correct guess should be a win | expected=Win, got=Too Low
+2026-04-25 09:02:27,577 - PASS | Guess too high should return Too High | expected=Too High, got=Too High
+2026-04-25 09:02:27,577 - PASS | Guess too low should return Too Low | expected=Too Low, got=Too Low
+2026-04-25 09:02:27,577 - PASS | Valid number string should parse correctly | expected=True, got=True
+2026-04-25 09:02:27,577 - PASS | Non-number guess should fail to parse | expected=False, got=False
+2026-04-25 09:02:27,577 - PASS | Win on first attempt should score 90 | expected=90, got=90
+2026-04-25 09:02:27,577 - PASS | Wrong guess Too Low should deduct 5 points | expected=95, got=95
+2026-04-25 09:02:27,577 - AFC is enabled with max remote calls: 10.
+2026-04-25 09:02:32,058 - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-25 09:02:32,061 - Gemini report generated successfully
+2026-04-25 09:07:52,429 - FAIL | Correct guess should be a win | expected=Win, got=Too Low
+2026-04-25 09:07:52,429 - FAIL | Guess too high should return Too High | expected=Too High, got=Win
+2026-04-25 09:07:52,429 - PASS | Guess too low should return Too Low | expected=Too Low, got=Too Low
+2026-04-25 09:07:52,429 - PASS | Valid number string should parse correctly | expected=True, got=True
+2026-04-25 09:07:52,429 - PASS | Non-number guess should fail to parse | expected=False, got=False
+2026-04-25 09:07:52,429 - PASS | Win on first attempt should score 90 | expected=90, got=90
+2026-04-25 09:07:52,429 - PASS | Wrong guess Too Low should deduct 5 points | expected=95, got=95
+2026-04-25 09:07:52,429 - AFC is enabled with max remote calls: 10.
+2026-04-25 09:08:02,505 - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-25 09:08:02,509 - Gemini report generated successfully
+2026-04-25 09:09:12,245 - PASS | Correct guess should be a win | expected=Win, got=Win
+2026-04-25 09:09:12,245 - PASS | Guess too high should return Too High | expected=Too High, got=Too High
+2026-04-25 09:09:12,245 - PASS | Guess too low should return Too Low | expected=Too Low, got=Too Low
+2026-04-25 09:09:12,245 - PASS | Valid number string should parse correctly | expected=True, got=True
+2026-04-25 09:09:12,245 - PASS | Non-number guess should fail to parse | expected=False, got=False
+2026-04-25 09:09:12,245 - PASS | Win on first attempt should score 90 | expected=90, got=90
+2026-04-25 09:09:12,245 - PASS | Wrong guess Too Low should deduct 5 points | expected=95, got=95
+2026-04-25 09:09:12,245 - AFC is enabled with max remote calls: 10.
+2026-04-25 09:09:16,847 - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-25 09:09:16,852 - Gemini report generated successfully
+2026-04-25 09:09:32,161 - FAIL | Correct guess should be a win | expected=Win, got=Too Low
+2026-04-25 09:09:32,161 - FAIL | Guess too high should return Too High | expected=Too High, got=Win
+2026-04-25 09:09:32,161 - PASS | Guess too low should return Too Low | expected=Too Low, got=Too Low
+2026-04-25 09:09:32,161 - PASS | Valid number string should parse correctly | expected=True, got=True
+2026-04-25 09:09:32,161 - PASS | Non-number guess should fail to parse | expected=False, got=False
+2026-04-25 09:09:32,161 - PASS | Win on first attempt should score 90 | expected=90, got=90
+2026-04-25 09:09:32,161 - PASS | Wrong guess Too Low should deduct 5 points | expected=95, got=95
+2026-04-25 09:09:32,161 - AFC is enabled with max remote calls: 10.
+2026-04-25 09:09:38,557 - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-25 09:09:38,561 - Gemini report generated successfully
+2026-04-25 09:12:17,791 - PASS | Correct guess should be a win | expected=Win, got=Win
+2026-04-25 09:12:17,791 - PASS | Guess too high should return Too High | expected=Too High, got=Too High
+2026-04-25 09:12:17,791 - PASS | Guess too low should return Too Low | expected=Too Low, got=Too Low
+2026-04-25 09:12:17,791 - PASS | Valid number string should parse correctly | expected=True, got=True
+2026-04-25 09:12:17,791 - PASS | Non-number guess should fail to parse | expected=False, got=False
+2026-04-25 09:12:17,791 - PASS | Win on first attempt should score 90 | expected=90, got=90
+2026-04-25 09:12:17,791 - PASS | Wrong guess Too Low should deduct 5 points | expected=95, got=95
+2026-04-25 09:12:17,791 - AFC is enabled with max remote calls: 10.
+2026-04-25 09:12:23,022 - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-25 09:12:23,027 - Gemini report generated successfully
+2026-04-25 09:16:37,237 - PASS | Correct guess should be a win | expected=Win, got=Win
+2026-04-25 09:16:37,237 - PASS | Guess too high should return Too High | expected=Too High, got=Too High
+2026-04-25 09:16:37,237 - PASS | Guess too low should return Too Low | expected=Too Low, got=Too Low
+2026-04-25 09:16:37,237 - PASS | Valid number string should parse correctly | expected=True, got=True
+2026-04-25 09:16:37,237 - PASS | Non-number guess should fail to parse | expected=False, got=False
+2026-04-25 09:16:37,237 - PASS | Win on first attempt should score 90 | expected=90, got=90
+2026-04-25 09:16:37,237 - PASS | Wrong guess Too Low should deduct 5 points | expected=95, got=95
+2026-04-25 09:16:37,237 - AFC is enabled with max remote calls: 10.
+2026-04-25 09:16:43,520 - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-04-25 09:16:43,524 - Gemini report generated successfully

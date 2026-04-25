@@ -64,6 +64,7 @@ logging.basicConfig(
 
 results = []
 
+# Run each test case and compare the actual output to the expected output
 for test in test_cases:
     fn = test["function"]
     args = test["input"]
@@ -79,6 +80,7 @@ for test in test_cases:
         elif fn == "update_score":
             actual = update_score(*args)
 
+        # Mark as PASS if actual matches expected, otherwise FAIL
         passed = actual == expected
         status = "PASS" if passed else "FAIL"
         
@@ -100,12 +102,14 @@ for test in test_cases:
 
 lines = []
 
+# Format test results into a readable summary to send to Gemini
 for r in results:
     line = f"- [{r['status']}] {r['description']} | expected={r['expected']}, got={r['actual']}"
     lines.append(line)
 
 summary = "\n".join(lines)
 
+# Prompt instructs Gemini to act as a reliability evaluator and interpret the results
 prompt = f"""
 You are a software reliability evaluator for a number guessing game.
 
@@ -116,12 +120,13 @@ Here are the test results from running the game logic:
 Please evaluate:
 1. Are the results correct and consistent?
 2. Are there any concerning failures?
-3. Give an overall reliability score from 0.0 to 1.0 as a percentage
+3. Give an overall reliability score from 0.0 to 1.0 as a percentage.
 4. Give a short recommendation for improvement.
 
 Be concise and specific.
 """
 
+# Send the test summary to Gemini and print its evaluation
 try:
     print("\n⏳ Sending results to Gemini for evaluation...")
     response = client.models.generate_content(
