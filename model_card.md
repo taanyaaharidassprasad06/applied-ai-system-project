@@ -1,4 +1,4 @@
-# 🎧 Model Card: Music Recommender Simulation
+# 🎮 Model Card: Game Glitch Investigator System
 
 ## 1. Model Name  
 
