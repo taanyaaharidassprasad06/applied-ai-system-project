@@ -26,7 +26,7 @@ Game Glitch Investigator is a number guessing game where players try to guess a 
 
 ### 1. Clone the repository
 ```
-git clone https://github.com/YOUR_USERNAME/applied-ai-system-project.git
+git clone https://github.com/USERNAME/applied-ai-system-project.git
 cd applied-ai-system-project
 ```
 
